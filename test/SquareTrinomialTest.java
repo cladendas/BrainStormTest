@@ -5,46 +5,90 @@ import static junit.framework.TestCase.assertEquals;
 
 public class SquareTrinomialTest {
 
-    private double xOne;
-
     @Test
-    public void noRoots() {
-        SquareTrinomial st = new SquareTrinomial(1,2,3);
-        SquareTrinomial.decision();
+    public void noRootsTest() {
+        SquareTrinomial st = new SquareTrinomial(1,1,1);
+        st.decision();
         assertEquals(true, st.getNoRoots());
+        assertEquals(false, st.getOneRoot());
+        assertEquals(false, st.getTwoRoots());
     }
 
     @Test
-    public void oneRoots() {
-        SquareTrinomial st = new SquareTrinomial(5,0,0);
-        SquareTrinomial.decision();
-        assertEquals(true, SquareTrinomial.getOneRoots());
+    public void oneRootTest_1() {
+        SquareTrinomial st = new SquareTrinomial(1,2,1);
+        st.decision();
+        assertEquals(true, st.getOneRoot());
+        assertEquals(-1.0, st.getX());
     }
 
     @Test
-    public void twoRoots() {
-        SquareTrinomial st = new SquareTrinomial(-2,3,0);
-        SquareTrinomial.decision();
-        assertEquals(true, SquareTrinomial.getTwoRoots());
+    public void oneRootTest_2() {
+        SquareTrinomial st = new SquareTrinomial(1,0,0);
+        st.decision();
+        assertEquals(true, st.getOneRoot());
+        assertEquals(0.0, st.getX());
     }
 
     @Test
-    public void aEquallyNull() {
+    public void oneRootTest_3() {
+        SquareTrinomial st = new SquareTrinomial(99,0,0);
+        st.decision();
+        assertEquals(true, st.getOneRoot());
+        assertEquals(0.0, st.getX());
+    }
+
+    @Test
+    public void oneRootTest_4() {
+        SquareTrinomial st = new SquareTrinomial(-99,0,0);
+        st.decision();
+        assertEquals(true, st.getOneRoot());
+        assertEquals(0.0, st.getX());
+    }
+
+    @Test
+    public void twoRootsTest_1() {
+        SquareTrinomial st = new SquareTrinomial(0.5,1,0);
+        st.decision();
+        assertEquals(true, st.getTwoRoots());
+        assertEquals(0.0, st.getX1());
+        assertEquals(-2.0, st.getX2());
+    }
+
+    @Test
+    public void twoRootsTest_2() {
+        SquareTrinomial st = new SquareTrinomial(-0.5,1,0);
+        st.decision();
+        assertEquals(true, st.getTwoRoots());
+        assertEquals(0.0, st.getX1());
+        assertEquals(2.0, st.getX2());
+    }
+
+    @Test
+    public void twoRootsTest_3() {
+        SquareTrinomial st = new SquareTrinomial(5,-6,-1);
+        st.decision();
+        assertEquals(true, st.getTwoRoots());
+        assertEquals(1.348331477354788, st.getX1());
+        assertEquals(-0.14833147735478827, st.getX2());
+    }
+
+    @Test
+    public void twoRootsTest_4() {
+        SquareTrinomial st = new SquareTrinomial(1,2.5,1);
+        st.decision();
+        assertEquals(true, st.getTwoRoots());
+        assertEquals(-0.5, st.getX1());
+        assertEquals(-2.0, st.getX2());
+    }
+
+    @Test
+    public void aEquallyNullTest() {
         SquareTrinomial st = new SquareTrinomial(0,3,4);
-        SquareTrinomial.decision();
-        assertEquals(true, SquareTrinomial.getAEquallyNull());
-    }
-
-    @Test
-    public void result() {
-
-    }
-
-    private void assertResult(double a, double b, double c) {
-        SquareTrinomial st = new SquareTrinomial(a,b,c);
-        SquareTrinomial.decision();
-        if (SquareTrinomial.getOneRoots()) {
-            assertEquals(xOne, SquareTrinomial.getX());
-        }
+        st.decision();
+        assertEquals(true, st.getAEquallyNull());
+        assertEquals(99999.99, st.getX());
+        assertEquals(99999.99, st.getX1());
+        assertEquals(99999.99, st.getX2());
     }
 }

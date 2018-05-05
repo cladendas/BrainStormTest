@@ -1,111 +1,86 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-
 public class SquareTrinomial {
-    private static double x = 0;
-    private static double x1 = 0;
-    private static double x2 = 0;
-    private static double aa;
-    private static double bb;
-    private static double cc;
-    private static double dd;
-    private static boolean noRoots;
-    private static boolean oneRoots;
-    private static boolean twoRoots;
-    private static boolean aEquallyNull;
+    private double x = 99999.99;
+    private double x1 = 99999.99;
+    private double x2 = 99999.99;
+    private double a;
+    private double b;
+    private double c;
+    private boolean noRoots;
+    private boolean oneRoots;
+    private boolean twoRoots;
+    private boolean aEqualNull;
 
-    public static double getX() {
+    public double getX() {
         return x;
     }
 
-    public static double getX1() {
+    public double getX1() {
         return x1;
     }
 
-    public static double getX2() {
+    public double getX2() {
         return x2;
     }
 
-    public static boolean getNoRoots() {
+    public boolean getNoRoots() {
         return noRoots;
     }
 
-    public static boolean getOneRoots() {
+    public boolean getOneRoot() {
         return oneRoots;
     }
 
-    public static boolean getTwoRoots() {
+    public boolean getTwoRoots() {
         return twoRoots;
     }
 
-    public static boolean getAEquallyNull() {
-        return aEquallyNull;
+    public boolean getAEquallyNull() {
+        return aEqualNull;
     }
 
-    public SquareTrinomial(double aa, double bb, double cc) {
-        this.aa = aa;
-        this.bb = bb;
-        this.cc = cc;
+    public SquareTrinomial(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
 
-    public static void main(String[] args) throws IOException {
+    public SquareTrinomial() {}
 
-
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        String dsd = br.readLine().trim();
-//        System.out.println(dsd);
-//    scanner();
-        decision();
+    public static void main(String[] args) {
+        SquareTrinomial st = new SquareTrinomial();
+        st.decision();
     }
 
-    public static void decision() {
-        if (aa == 0) {
-//            System.out.println("Число a не может быть равным 0");
-            aEquallyNull = true;
+    public void decision() {
+        double discriminant = -1;
+        if (a == 0) {
+            aEqualNull = true;
+        } else {
+            discriminant = Math.pow(b, 2) - (4 * a * c);
         }
-        dd = (bb * bb) - (4 * aa * cc);
-        if (dd > 0) {
-            double ddd  = Math.sqrt(dd);
-            x1 = (-bb - ddd) / (2 * aa);
-            x2 = (-bb + ddd) / (2 * aa);
-//            System.out.println(x1);
-//            System.out.println(x2);
+        if (discriminant > 0) {
+            double squareOfDiscr = Math.sqrt(discriminant);
+            x1 = realZero((-b + squareOfDiscr) / (2 * a));
+            x2 = realZero((-b - squareOfDiscr) / (2 * a));
             twoRoots = true;
-        } else if (dd < 0) {
-//            System.out.println("решением являются комплексные числа");
+        } else if (discriminant < 0) {
             noRoots = true;
         } else {
-            x = -bb / (2 * aa);
-//            System.out.println(x);
+            x = realZero(-b / (2 * a));
             oneRoots = true;
         }
     }
-//    public static void scanner() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Введи число a:");
-//        while ((aa = scanner.nextInt()) == 0) {
-//            System.out.println("Число a не может быть равным 0");
-//            System.out.println("Введи число a:");
-//            continue;
-//        }
-//        System.out.println("Введи число b:");
-//        bb = scanner.nextInt();
-//        System.out.println("Введи число c:");
-//        cc = scanner.nextInt();
-//        dd = (bb * bb) - (4 * aa * cc);
-//        if (dd > 0) {
-//            double ddd  = Math.sqrt(dd);
-//            x1 = (-bb - ddd) / (2 * aa);
-//            x2 = (-bb + ddd) / (2 * aa);
-//            System.out.println(x1);
-//            System.out.println(x2);
-//        } else if (dd < 0) {
-//            System.out.println("решением являются комплексные числа");
-//        } else {
-//            x = -bb / (2 * aa);
-//            System.out.println(x);
-//        }
-//    }
+
+    /*
+    данный метод необходим для решения ситуации с различным представлением 0.0 и -0.0,
+    также данную ситуацю можно было бы решить с помощью побитового сравнения,
+    используюя метод long Double.doubleToLongBits(double),
+    но в данной задаче мне это кажется нецелесообразным
+     */
+    private double realZero(double number) {
+        if (number == -0.0) {
+            return 0.0;
+        }
+        return number;
+    }
 }
