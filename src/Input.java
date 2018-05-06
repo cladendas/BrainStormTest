@@ -1,6 +1,11 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/*
+Класс Input для считывания с консоли и обработки введенных пользователем данных.
+Метод для считывания с консоли inputDouble() и обработки исключения несоответствия введенных данных.
+Метод для логирования исключения exceptionMessage().
+ */
 public class Input {
 
     Scanner scanner = new Scanner(System.in);
@@ -11,7 +16,8 @@ public class Input {
 
                 double valueInt = scanner.nextDouble();
 
-                scanner.nextLine();  // для отчистки буфера от \n
+//                для отчистки буфера от \n
+                scanner.nextLine();
 
                 return valueInt;
 
@@ -22,8 +28,9 @@ public class Input {
     }
 
     private void exceptionMessage() {
+//        Реализовать логирование вместо вывода в консоль
         System.out.println("НЕОБХОДИМО ВВЕСТИ ИМЕННО ЦИФРУ");
-        scanner.nextLine();  // для отчистки буфера от \n
+//        для отчистки буфера от \n
+        scanner.nextLine();
     }
-
 }

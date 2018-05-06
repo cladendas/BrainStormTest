@@ -1,3 +1,13 @@
+/*
+Класс Decision для решения уравнения с использованием полученных данных.
+Метод void decisions() проверяет на ноль коэфициент a (boolean aEqualNull), вычисляет дискриминант double discriminant,
+затем на основе него возвращает решение:
+нет корней (boolean noRoots), один корень (boolean oneRoots, double x),
+два корня (boolean twoRoots, double x1, double x2).
+Для переменных a, b, c есть сеттеры.
+Для решений уравнения есть геттеры.
+Метод double realZero(double number) необходим для решения ситуации с различным представлением 0.0 и -0.0.
+ */
 public class Decision {
     private double x = 99999.99;
     private double x1 = 99999.99;
@@ -11,7 +21,7 @@ public class Decision {
     private boolean twoRoots;
     private boolean aEqualNull;
 
-    protected void decision() {
+    protected void decisions() {
         double discriminant = -1;
         if (a == 0) {
             aEqualNull = true;
@@ -32,7 +42,7 @@ public class Decision {
     }
 
     /*
-    данный метод необходим для решения ситуации с различным представлением 0.0 и -0.0,
+    Данный метод необходим для решения ситуации с различным представлением 0.0 и -0.0,
     также данную ситуацю можно было бы решить с помощью побитового сравнения,
     используюя метод long Double.doubleToLongBits(double),
     но в данной задаче мне это кажется нецелесообразным
@@ -54,10 +64,6 @@ public class Decision {
 
     public void setC(double c) {
         this.c = c;
-    }
-
-    private double setter(double number) {
-        return 6.8;
     }
 
     public double getX() {
