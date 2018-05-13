@@ -21,10 +21,11 @@ public class Decision {
     private boolean twoRoots;
     private boolean aEqualNull;
 
-    protected void decisions() {
+    protected String decisions() {
         double discriminant = -1;
         if (a == 0) {
             aEqualNull = true;
+            return "\"A\" must not be ZERO!";
         } else {
             discriminant = Math.pow(b, 2) - (4 * a * c);
         }
@@ -33,11 +34,14 @@ public class Decision {
             x1 = realZero((-b + squareOfDiscr) / (2 * a));
             x2 = realZero((-b - squareOfDiscr) / (2 * a));
             twoRoots = true;
+            return "x1 = " + x1 + "; " + "x2 = " + x2;
         } else if (discriminant < 0) {
             noRoots = true;
+            return "The equation has no roots";
         } else {
             x = realZero(-b / (2 * a));
             oneRoots = true;
+            return "x = " + x;
         }
     }
 
