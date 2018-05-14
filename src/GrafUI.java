@@ -55,11 +55,11 @@ public class GrafUI {
     public class ButtonDesListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            String a = fieldA.getText().trim();
+            String a = fieldA.getText().trim().replace(',','.');
             Double aa = null;
-            String b = fieldB.getText().trim();
+            String b = fieldB.getText().trim().replace(',','.');
             Double bb = null;
-            String c = fieldC.getText();
+            String c = fieldC.getText().replace(',','.');
             Double cc = null;
             if (!"".equals(a) && !"".equals(b) && !"".equals(c)) {
                 aa = Double.parseDouble(a);
