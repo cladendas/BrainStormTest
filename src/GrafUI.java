@@ -70,6 +70,8 @@ public class GrafUI {
                 decision.setB(bb);
                 decision.setC(cc);
 
+                SQL.insertSQL(DateNow.getDate(), a, b, c);
+
                 labeldecision.setText(decision.decisions());
             }
         }
